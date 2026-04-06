@@ -1,0 +1,11 @@
+node_modules/
+dist/
+out/
+.DS_Store
+*.z3
+*.sav
+*.transcript.json
+plan.md
+spec.md
+.claude
+settings.json

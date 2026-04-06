@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IF-PAL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Serif:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="titlebar"></div>
+  <div id="app">
+    <div id="game-pane">
+      <div id="empty-state">
+        <h1>IF-PAL</h1>
+        <p>Load a .z3 game file to begin</p>
+        <button id="open-btn">Open a game...</button>
+      </div>
+      <div id="game-output"></div>
+      <div id="game-input-row" style="display:none">
+        <span id="game-prompt">&gt;</span>
+        <input id="game-input" type="text" autocomplete="off" spellcheck="false" />
+      </div>
+    </div>
+    <div id="companion-pane">
+      <div id="companion-header">GRUE <span id="model-label"></span></div>
+      <div id="ollama-banner" style="display:none"></div>
+      <div id="chat-messages"></div>
+      <div id="typing-indicator" style="display:none">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+      <div id="chat-input-row">
+        <textarea id="chat-input" placeholder="Talk to Grue..." rows="1"></textarea>
+        <button id="send-btn">→</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="./src/main.ts"></script>
+</body>
+</html>

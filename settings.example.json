@@ -1,0 +1,7 @@
+{
+  "provider": "ollama",
+  "model": "qwen2.5:3b",
+  "ollamaPort": 11434,
+  "debounceMs": 1500,
+  "anthropicApiKey": "sk-ant-..."
+}

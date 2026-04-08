@@ -21,6 +21,9 @@ let outputBuffer = ''
 let waitingForOutput = false
 let outputTimer: ReturnType<typeof setTimeout> | null = null
 let suppressEcho = ''  // command text to suppress when dfrotz echoes it back
+let introBuffer = ''
+let introTimer: ReturnType<typeof setTimeout> | null = null
+let introSent = false
 const META = new Set(['SAVE', 'RESTORE', 'LOAD', 'QUIT', 'VERBOSE', 'BRIEF', 'SUPERBRIEF', 'SCRIPT'])
 
 // eslint-disable-next-line no-control-regex
@@ -55,6 +58,9 @@ api.onGameStarted(() => {
   gameOutput.textContent = ''
   gameInputRow.style.display = 'flex'
   titleSet = false
+  introBuffer = ''
+  introSent = false
+  if (introTimer) { clearTimeout(introTimer); introTimer = null }
   setTimeout(() => gameInput.focus(), 100)
 })
 
@@ -84,6 +90,22 @@ api.onGameData((data: string) => {
       }
     }
     appendGameText(displayText)
+  }
+
+  // Capture intro text before the player has typed anything
+  if (!introSent && !waitingForOutput) {
+    introBuffer += stripped
+    if (introTimer) clearTimeout(introTimer)
+    introTimer = setTimeout(() => {
+      const cleanIntro = introBuffer
+        .split('\n')
+        .filter(line => !/Score:\s*\d+\s+Moves:\s*\d+/.test(line))
+        .join('\n')
+        .trim()
+      if (cleanIntro) api.sendIntro(cleanIntro)
+      introSent = true
+      introTimer = null
+    }, 500)
   }
 
   if (waitingForOutput) {

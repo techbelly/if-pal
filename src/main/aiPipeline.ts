@@ -22,6 +22,11 @@ export class AIPipeline {
     this.win = win
   }
 
+  sendIntro(text: string): void {
+    this.context.addIntroText(text)
+    this.generate(true)
+  }
+
   addTurn(turn: Turn): void {
     if (this.isGenerating) {
       this.queuedTurns.push(turn)

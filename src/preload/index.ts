@@ -5,6 +5,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   openGameDialog: () => ipcRenderer.send('game:open-dialog'),
   sendInput: (data: string) => ipcRenderer.send('game:input', data),
   sendResize: (cols: number, rows: number) => ipcRenderer.send('game:resize', cols, rows),
+  sendIntro: (text: string) => ipcRenderer.send('game:intro', text),
   sendTurn: (turn: { input: string; output: string }) => ipcRenderer.send('game:turn', turn),
   sendPlayerMessage: (message: string) => ipcRenderer.send('player:message', message),
   onGameData: (cb: (data: string) => void) => ipcRenderer.on('game:data', (_e, d) => cb(d)),

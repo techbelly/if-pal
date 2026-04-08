@@ -123,6 +123,9 @@ ipcMain.on('window:set-title', (_event, title: string) => { mainWindow?.setTitle
 ipcMain.on('game:input', (_event, data: string) => { gamePty?.write(data) })
 ipcMain.on('game:resize', (_event, cols: number, rows: number) => { gamePty?.resize(cols, rows) })
 ipcMain.on('game:open-dialog', () => openGameDialog())
+ipcMain.on('game:intro', (_event, text: string) => {
+  aiPipeline?.sendIntro(text)
+})
 ipcMain.on('game:turn', (_event, turn: { input: string; output: string }) => {
   aiPipeline?.addTurn(turn)
 })

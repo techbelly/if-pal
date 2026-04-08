@@ -29,6 +29,13 @@ When asked for a hint: one gentle nudge, never the full answer.`
 export class ContextManager {
   private messages: Message[] = [{ role: 'system', content: SYSTEM_PROMPT }]
 
+  addIntroText(text: string): void {
+    this.messages.push({
+      role: 'user',
+      content: `[Game intro]\n${text.trim()}`
+    })
+  }
+
   addGameTurn(input: string, output: string): void {
     this.messages.push({
       role: 'user',
